@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_blue">#5C7CFA</color>
+    <color name="primary_dark">#4263EB</color>
+    <color name="accent_blue">#748FFC</color>
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#666666</color>
+    <color name="bg_light">#F8F9FA</color>
+    <color name="tag_good">#0B7285</color>
+    <color name="tag_like_new">#2B8A3E</color>
+    <color name="tag_fair">#E67700</color>
+    <color name="tag_poor">#C92A2A</color>
+</resources>
