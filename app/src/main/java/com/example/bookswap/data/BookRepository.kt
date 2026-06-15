@@ -21,4 +21,9 @@ object BookRepository {
             it.isbn.contains(q)
         }
     }
+
+    fun addBook(book: Book) {
+        // Add to the beginning of the list so it shows up at the top
+        books.add(0, book)
+    }
 }

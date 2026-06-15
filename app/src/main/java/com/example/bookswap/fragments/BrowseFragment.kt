@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bookswap.activities.AddBookActivity
 import com.example.bookswap.activities.BookDetailsActivity
 import com.example.bookswap.adapters.BookAdapter
 import com.example.bookswap.data.BookRepository
@@ -32,6 +33,16 @@ class BrowseFragment : Fragment() {
         
         setupRecyclerView()
         setupSearch()
+
+        binding.fabAddBook.setOnClickListener {
+            startActivity(Intent(requireContext(), AddBookActivity::class.java))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh the list when returning from AddBookActivity
+        refreshList()
     }
 
     private fun setupRecyclerView() {
@@ -51,12 +62,16 @@ class BrowseFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                val query = s.toString()
-                val filtered = BookRepository.searchBooks(query)
-                adapter.updateBooks(filtered)
-                updateEmptyState(filtered.isEmpty())
+                refreshList()
             }
         })
+    }
+
+    private fun refreshList() {
+        val query = binding.etSearch.text?.toString() ?: ""
+        val filtered = BookRepository.searchBooks(query)
+        adapter.updateBooks(filtered)
+        updateEmptyState(filtered.isEmpty())
     }
     
     private fun updateEmptyState(isEmpty: Boolean) {

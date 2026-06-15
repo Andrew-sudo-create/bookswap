@@ -25,6 +25,7 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.BookDetailsActivity" />
+        <activity android:name=".activities.AddBookActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
