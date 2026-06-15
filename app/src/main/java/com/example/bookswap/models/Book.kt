@@ -1,6 +1,7 @@
 package com.example.bookswap.models
 
 import java.io.Serializable
+import java.util.Locale
 
 data class Book(
     val id: Int,
@@ -14,4 +15,7 @@ data class Book(
     val description: String,
     val sellerName: String,
     val sellerEmail: String
-) : Serializable
+) : Serializable {
+    val formattedPrice: String get() = String.format(Locale.US, "$%.2f", price)
+    val authorAndEdition: String get() = "$author • $edition"
+}

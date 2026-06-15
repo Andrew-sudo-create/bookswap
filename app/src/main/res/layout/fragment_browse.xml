@@ -25,7 +25,8 @@
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_menu_search"
                 app:tint="@color/text_secondary"
-                android:layout_marginStart="8dp" />
+                android:layout_marginStart="8dp"
+                android:contentDescription="Search Icon" />
 
             <EditText
                 android:id="@+id/et_search"
@@ -33,17 +34,34 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="@string/search_hint"
+                android:inputType="text"
                 android:padding="8dp"
                 android:textSize="14sp"
-                android:textColorHint="@color/text_secondary" />
+                android:textColorHint="@color/text_secondary"
+                android:autofillHints="none"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_books"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="8dp" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_books"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tv_empty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="No books found."
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </FrameLayout>
 
 </LinearLayout>

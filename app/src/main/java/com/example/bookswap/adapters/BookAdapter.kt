@@ -16,13 +16,8 @@ class BookAdapter(
         RecyclerView.ViewHolder(binding.root) {
         
         fun bind(book: Book) {
-            binding.tvTitle.text = book.title
-            binding.tvPrice.text = String.format("$%.2f", book.price)
-            binding.tvAuthorEdition.text = "${book.author} • ${book.edition}"
-            binding.tvCondition.text = book.condition
-            binding.tvCategory.text = book.category
-
-            val context = binding.root.context
+            binding.book = book
+            
             val bgRes = when (book.condition) {
                 "Like New" -> R.drawable.tag_bg_like_new
                 "Good" -> R.drawable.tag_bg_good
@@ -32,6 +27,7 @@ class BookAdapter(
             binding.tvCondition.setBackgroundResource(bgRes)
 
             binding.root.setOnClickListener { onBookClick(book) }
+            binding.executePendingBindings()
         }
     }
 

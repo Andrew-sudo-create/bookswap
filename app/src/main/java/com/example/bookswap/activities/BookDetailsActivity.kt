@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookswap.R
 import com.example.bookswap.databinding.ActivityBookDetailsBinding
 import com.example.bookswap.models.Book
+import java.util.Locale
 
 class BookDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookDetailsBinding
@@ -28,7 +29,7 @@ class BookDetailsActivity : AppCompatActivity() {
         book = intent.getSerializableExtra("BOOK_EXTRA") as? Book
 
         binding.toolbar.setNavigationOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         populateBookDetails()
@@ -41,7 +42,7 @@ class BookDetailsActivity : AppCompatActivity() {
     private fun populateBookDetails() {
         book?.let { b ->
             binding.tvTitle.text = b.title
-            binding.tvPrice.text = String.format("$%.2f", b.price)
+            binding.tvPrice.text = String.format(Locale.US, "$%.2f", b.price)
             binding.tvCondition.text = b.condition
             binding.tvCategory.text = b.category
             binding.tvAuthor.text = b.author
@@ -79,7 +80,7 @@ class BookDetailsActivity : AppCompatActivity() {
             val btnSend = dialog.findViewById<Button>(R.id.btn_send)
 
             tvTitle.text = getString(R.string.send_inquiry, b.sellerName)
-            tvSubtitle.text = "Your message will be sent to the seller's email: ${b.sellerEmail}"
+            tvSubtitle.text = getString(R.string.send_inquiry_subtitle, b.sellerEmail)
 
             etMessage.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -100,6 +101,8 @@ class BookDetailsActivity : AppCompatActivity() {
                 if (!etMessage.text.isNullOrBlank()) {
                     Toast.makeText(this, "Message sent to ${b.sellerName}", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
+                } else {
+                    Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
                 }
             }
 
